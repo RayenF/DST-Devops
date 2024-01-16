@@ -1,0 +1,29 @@
+name: Tag Workflow
+
+on:
+  push:
+    tags:
+      - 'v*'
+env : VAR1 : a
+      VAR2 : b
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Positive
+        if: a => 0 AND b => 0
+        run: echo a, b
+
+  job2:
+    runs-on: ubuntu-latest
+    steps :
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+        - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
