@@ -37,7 +37,6 @@ jobs:
         run: echo 'VAR1 = "test"'
 
   job2:
-    needs: job1
     runs-on: ubuntu-latest
     steps:
       - name: VAR2
