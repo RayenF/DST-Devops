@@ -19,3 +19,27 @@ jobs:
     steps:
       - name: VAR2
         run: echo "Le job précédent a échoué"
+
+#Partie bonus 
+
+name: Tag Workflow
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: VAR1
+        run: echo 'VAR1 = "test"'
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: VAR2
+        run: echo "Le job précédent a échoué"
+
