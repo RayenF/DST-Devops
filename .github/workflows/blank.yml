@@ -1,47 +1,21 @@
-name : Tag Workflow
+name: Tag Workflow
 
-on :
+on:
   push:
     tags:
       - 'v*'
 
-
 jobs:
   job1:
-    value : VAR1 = 'test'
-    runs-on : ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: VAR1
-        run: echo VAR1
-    condition : if {job1 = not true}
-      job2:
-        needs: job1
-        runs-on : ubuntu-latest
-        steps:
-          - name: Step 2
-            run: echo "Le job précédent a échoué"
+        run: echo 'VAR1 = "test"'
 
-
-#Bonus partie : retirer la condition pour qu'elle s'execute quelque soit le résultat du job précédent :
-
-name : Tag Workflow
-
-on :
-  push:
-    tags:
-      - 'v*'
-
-
-jobs:
-  job1:
-    value : VAR1 = 'test'
-    runs-on : ubuntu-latest
-    steps:
-      - name: VAR1
-        run: echo VAR1
   job2:
     needs: job1
-    runs-on : ubuntu-latest
+    runs-on: ubuntu-latest
+    if: failure()  # Exécute job2 seulement si job1 échoue
     steps:
       - name: Step 2
         run: echo "Le job précédent a échoué"
