@@ -15,7 +15,7 @@ jobs:
   job2:
     needs: job1
     runs-on: ubuntu-latest
-    if: failure()  # Exécute job2 seulement si job1 échoue
+    if: job1 = failure() 
     steps:
-      - name: Step 2
+      - name: VAR2
         run: echo "Le job précédent a échoué"
